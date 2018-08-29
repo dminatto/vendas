@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="pt-br">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,7 +7,9 @@
         <link href="/css/app.css" rel="stylesheet">
         <link href="/css/home.css" rel="stylesheet">
         <script src="/js/home.js"></script> 
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+
         <title>Sistema</title>
     </head>
 
@@ -23,16 +25,16 @@
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav animate side-nav">
         <li class="nav-item">
-            <a class="nav-link" href="#" title="Vendedores"><i class="fas fa-briefcase"></i> Vendedores <i class="fas fa-briefcase shortmenu animate"></i></a>
+            <a class="nav-link" href="{{action('SellerController@list')}}" title="Vendedores"><i class="fas fa-briefcase"></i> Vendedores <i class="fas fa-briefcase shortmenu animate"></i></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" title="Produtos"><i class="fas fa-cube"></i> Produtos <i class="fas fa-cube shortmenu animate"></i></a>
+            <a class="nav-link" href="{{action('ItemController@list')}}" title="Estoque"><i class="fas fa-cube"></i>Estoque<i class="fas fa-cube shortmenu animate"></i></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#" title="Venda"><i class="fas fa-cart-plus"></i> Venda <i class="fas fa-cart-plus shortmenu animate"></i></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" title="Venda"><i class="fas fa-newspaper"></i> Relatórios <i class="fas fa-newspaper shortmenu animate"></i></a>
+            <a class="nav-link" href="#" title="Relatórios"><i class="fas fa-newspaper"></i> Relatórios <i class="fas fa-newspaper shortmenu animate"></i></a>
           </li>
         </ul>
         <ul class="navbar-nav ml-md-auto d-md-flex">
@@ -45,6 +47,15 @@
         </ul>
       </div>
     </nav>
+    <script>
+      $(document).ready( function () {
+        $('.leftmenutrigger').on('click', function (e) {
+          $('.side-nav').toggleClass("open");
+          $('#wrapper').toggleClass("open");
+          e.preventDefault();
+        });
+      });
+    </script>
     <div class="container-fluid">
       @yield('conteudo')
     </div>
