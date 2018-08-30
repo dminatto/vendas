@@ -4,7 +4,7 @@
 
 <div class="row">
     <h1>Listagem do Estoque</h1>
-    <button type="button" onClick='addSeller()' class="btn btn-primary ml-md-auto d-md-flex btadd">Adicionar</button>
+    <button type="button" onClick='addItem()' class="btn btn-primary ml-md-auto d-md-flex btadd">Adicionar</button>
 </div>
 
 @if(old('name'))
@@ -15,7 +15,7 @@
 
 @if(empty($items))
 <div class="alert alert-danger" role="alert">
-    Atenção! Não existem produtos ou serviços cadastrados!
+    Atenção! Não existem itens cadastrados!
 </div>
 @else
 <div class="row">
@@ -34,13 +34,13 @@
         <tbody>
           @foreach ($items as $i)
             <tr>
-                <th scope="row"><?= $s->id ?></th>
+                <th scope="row"><?= $i->id ?></th>
                 <td><?= $i->type ?></td>
                 <td><?= $i->description ?></td>
                 <td><?= $i->quantity ?></td>
-                <td> <a class="detailitem" href="{{action('ItemController@detail', $s->id)}}"><i class="fas fa-search-plus"></i></a></td>
-                <td> <a class="edititem" href="{{action('ItemController@edit', $s->id)}}"><i class="fas fas fa-edit"></i></a></td>
-                <td> <a class="delitem" href="{{action('ItemController@delete', $s->id)}}"><i class="fas fas fa-trash"></i></a></td>
+                <td> <a class="detailitem" href="{{action('ItemController@detail', $i->id)}}"><i class="fas fa-search-plus"></i></a></td>
+                <td> <a class="edititem" href="{{action('ItemController@edit', $i->id)}}"><i class="fas fas fa-edit"></i></a></td>
+                <td> <a class="delitem" href="{{action('ItemController@delete', $i->id)}}"><i class="fas fas fa-trash"></i></a></td>
                 <td> </td>   
             </tr>
             @endforeach

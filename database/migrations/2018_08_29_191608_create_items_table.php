@@ -19,7 +19,7 @@ class CreateItemsTable extends Migration
             $table->string('type');
             $table->string('ncm');
             $table->string('unit');
-            $table->decimal('price', 8, 2);
+            $table->decimal('price', 10, 2);
             $table->decimal('quantity', 8, 0);
             $table->timestamps();
         });

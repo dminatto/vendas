@@ -26,3 +26,16 @@ function editSeller(id){
 function listSeller(){
   location.href='/vendedores';
 }
+
+function addItem(){
+  location.href='/estoque/novo';
+};
+
+function editItem(id){
+  location.href= '/estoque/editar/' + id
+};
+
+function listItem(){
+  location.href='/estoque';
+}
+

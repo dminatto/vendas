@@ -9,7 +9,7 @@ use Request;
 class ItemController extends Controller {
     
     public function new(){ 
-        return view('altersaller') -> with('s', new Item);
+        return view('alteritem') -> with('i', new Item);
     }
 
     public function add(){
@@ -21,7 +21,7 @@ class ItemController extends Controller {
 
     public function list(){
         $item = Item::all();
-        return view('listitem')->withItems($item);
+        return view('listitem') -> with('items', $item);
     }
 
     public function delete($id) {
@@ -37,7 +37,7 @@ class ItemController extends Controller {
             return "Esse fornecedor não existe"; 
         } 
         
-        return view('altersaller') -> with('i', $item); 
+        return view('alteritem') -> with('i', $item); 
     }
 
     public function update($id) {
