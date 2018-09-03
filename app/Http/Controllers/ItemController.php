@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Item;
 use Request;
-
+use Auth;
 
 class ItemController extends Controller {
     
+    public function __construct() { 
+        $this->middleware('auth'); 
+    }
+
     public function new(){ 
         return view('alteritem') -> with('i', new Item);
     }

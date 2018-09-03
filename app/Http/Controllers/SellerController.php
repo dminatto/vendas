@@ -7,6 +7,11 @@ use Request;
 
 
 class SellerController extends Controller {
+
+    public function __construct() { 
+        $this->middleware('auth'); 
+    }
+    
     public function new(){ 
         return view('altersaller') -> with('s', new Seller);
     }

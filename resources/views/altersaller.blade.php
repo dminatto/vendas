@@ -48,8 +48,8 @@
             </div>
         </div>
         <div class="col-md-2 mb-3">
-            <label for="sex">Gênero </label>
-            <select class="form-control" name="sex" value=<?= $s->sex ?> required>
+            <label for="gender">Gênero </label>
+            <select class="form-control" name="gender" value=<?= $s->gender ?> required>
               <option></option>
               <option value="M">Masculino</option>
               <option value="F">Feminino</option>

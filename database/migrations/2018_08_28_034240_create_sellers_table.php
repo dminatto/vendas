@@ -19,7 +19,7 @@ class CreateSellersTable extends Migration
             $table->string('lastname');
             $table->decimal('cpf', 11, 0);
             $table->date('dtborn');
-            $table->string('sex');
+            $table->string('gender');
             $table->decimal('phone', 11, 0);
             $table->date('dtemployed');
             $table->decimal('cep', 8, 0);

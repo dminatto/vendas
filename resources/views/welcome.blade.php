@@ -25,24 +25,24 @@
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav animate side-nav">
         <li class="nav-item">
+            <a class="nav-link" href="{{action('Auth\LoginController@index')}}" title="Home"><i class="fas fa-home"></i> Home <i class="fas fa-home shortmenu animate"></i></a>
+          </li>
+        <li class="nav-item">
             <a class="nav-link" href="{{action('SellerController@list')}}" title="Vendedores"><i class="fas fa-briefcase"></i> Vendedores <i class="fas fa-briefcase shortmenu animate"></i></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{action('ItemController@list')}}" title="Estoque"><i class="fas fa-cube"></i>Estoque<i class="fas fa-cube shortmenu animate"></i></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" title="Venda"><i class="fas fa-cart-plus"></i> Venda <i class="fas fa-cart-plus shortmenu animate"></i></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" title="Relatórios"><i class="fas fa-newspaper"></i> Relatórios <i class="fas fa-newspaper shortmenu animate"></i></a>
+            <a class="nav-link" href="{{action('SaleController@list')}}" title="Venda"><i class="fas fa-cart-plus"></i> Venda <i class="fas fa-cart-plus shortmenu animate"></i></a>
           </li>
         </ul>
         <ul class="navbar-nav ml-md-auto d-md-flex">
           <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fas fa-user"></i> Admin</a>
+            <a class="nav-link" href="#"><i class="fas fa-user"></i>  @if(Auth::check()) {{Auth::user()->name}} @endif  </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            <a class="nav-link" href="{{action('Auth\LoginController@logout')}}" <i class="fas fa-sign-out-alt"></i> Logout</a>
           </li>
         </ul>
       </div>
@@ -56,7 +56,7 @@
         });
       });
     </script>
-    <div class="container-fluid">
+    <div class="container">
       @yield('conteudo')
     </div>
   </div>

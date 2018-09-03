@@ -51,7 +51,7 @@ function mask($val, $mask)
                 <ul class="container details">
                 <li><p>CPF: <?= mask($s->cpf,'###.###.###-##') ?></p></li>
                 <li><p>Data de Nascimento: <?= date_format(new DateTime($s->dtborn), "d/m/Y") ?></p></li>
-                <li><p>Gênero: <?= $s->sex ?></p></li>
+                <li><p>Gênero: <?= $s->gender ?></p></li>
                 <li><p>Telefone: <?= telephone($s->phone) ?></p></li>
                 <li><p>Data de Contratação: <?= date_format(new DateTime($s->dtemployed), "d/m/Y") ?></p></li>
                 </ul>

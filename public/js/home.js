@@ -39,3 +39,24 @@ function listItem(){
   location.href='/estoque';
 }
 
+function addSale(){
+  location.href='/venda/novo';
+};
+
+function editSale(id){
+  location.href= '/venda/editar/' + id
+};
+
+function listSale(){
+  location.href='/venda';
+};
+
+function remove(item) {
+    var tr = $(item).closest('tr');
+
+    tr.fadeOut(400, function() {
+      tr.remove();  
+    });
+
+    return false;
+  };
