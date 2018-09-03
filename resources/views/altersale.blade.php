@@ -2,14 +2,6 @@
 
 @section('conteudo')
 
-@php
-    function calc_price($qtd, $value){
-        $result = $qtd * $value;
-        return $result;
-    }
-
-@endphp
-
 <div class="row">
     @if(isset($sale->id))
         <h1>Edição de Venda</h1>
@@ -117,7 +109,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">R$</span>
                                             </div>
-                                            <input type="text" class="form-control text-right" value="<?= calc_price($item->quantity, $item->item->price) ?>" disabled>
+                                            <input type="text" class="form-control text-right" value="<?= $item->calc_price($item->quantity, $item->item->price) ?>" disabled>
                                         </div>	
                                     </td>
                                     <td><button type="button" class="btn btn-secundary" id="btn_del" onclick="remove(this)"><i class="fas fas fa-trash"></i></button></td>

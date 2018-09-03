@@ -29,7 +29,8 @@
                                 <tr>
         							<td class="text-center"><strong>Item</strong></td>
         							<td class="text-center"><strong>Quantidade</strong></td>
-                                    <td class="text-right"><strong>Valor Unitário</strong></td>
+									<td class="text-right"><strong>Valor Unitário</strong></td>
+									<td class="text-right"><strong>Comissão</strong></td>
                                     <td class="text-right"><strong>Total</strong></td>
                                 </tr>
     						</thead>
@@ -39,13 +40,15 @@
     							<tr>
                                     <td class="text-center"><?= $item->item->description?></td>
     								<td class="text-center"><?=$item->quantity?></td>
-    								<td class="text-right"><?= $item->item->price ?></td>
+									<td class="text-right"><?= $item->item->price ?></td>
+									<td class="text-right"><?=$item->commission?></td>
                                     <td class="text-right"><?=$item->value ?></td>
     							</tr>
                             @endforeach
     							<tr>
     								<td class="thick-line"></td>
-                                    <td class="thick-line"></td>
+									<td class="thick-line"></td>
+									<td class="thick-line"></td>
     								<td class="thick-line text-center"><strong>Subtotal</strong></td>
                                     <td class="thick-line text-right">R$ <?= $sale->value?></td>                          
     							</tr>

@@ -2,33 +2,7 @@
 
 @section('conteudo')
 
-@php
-function telephone($number){
-    $number="(".substr($number,0,2).") ".substr($number,2,-4)." - ".substr($number,-4);
-    // primeiro substr pega apenas o DDD e coloca dentro do (), segundo subtr pega os números do 3º até faltar 4, insere o hifem, e o ultimo pega apenas o 4 ultimos digitos
-    return $number;
-}
-
-function mask($val, $mask)
-{
- $maskared = '';
- $k = 0;
- for($i = 0; $i<=strlen($mask)-1; $i++)
- {
-   if($mask[$i] == '#')
-   {
-      if(isset($val[$k]))
-       $maskared .= $val[$k++];
-   }
-   else
- {
-     if(isset($mask[$i]))
-     $maskared .= $mask[$i];
-     }
- }
- return $maskared;
-}
-@endphp   
+ 
 <div class="jumbotron">
 <div class="row">
     <div class="col-md-12">
@@ -49,15 +23,15 @@ function mask($val, $mask)
             </div>
                 <hr>
                 <ul class="container details">
-                <li><p>CPF: <?= mask($s->cpf,'###.###.###-##') ?></p></li>
+                <li><p>CPF: <?= Helper::mask($s->cpf,'###.###.###-##') ?></p></li>
                 <li><p>Data de Nascimento: <?= date_format(new DateTime($s->dtborn), "d/m/Y") ?></p></li>
                 <li><p>Gênero: <?= $s->gender ?></p></li>
-                <li><p>Telefone: <?= telephone($s->phone) ?></p></li>
+                <li><p>Telefone: <?= Helper::telephone($s->phone) ?></p></li>
                 <li><p>Data de Contratação: <?= date_format(new DateTime($s->dtemployed), "d/m/Y") ?></p></li>
                 </ul>
                 <hr>
                 <ul class="container details">
-                <li><p>CEP: <?= mask($s->cep,'#####-###') ?></p></li>
+                <li><p>CEP: <?= Helper::mask($s->cep,'#####-###') ?></p></li>
                 <li><p>Endereço: <?= $s->adress . ", " . $s->adressnumber ?></p></li>
                 <li><p>Bairro: <?= $s->district ?></p></li>
                 <li><p>Cidade: <?= $s->city ?></p></li>

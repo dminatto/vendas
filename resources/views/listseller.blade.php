@@ -2,13 +2,6 @@
 
 @section('conteudo')
 
-@php
-function telephone($number){
-    $number="(".substr($number,0,2).") ".substr($number,2,-4)." - ".substr($number,-4);
-    return $number;
-}
-@endphp
-
 <div class="row">
     <h1>Listagem de Vendedores</h1>
     <button type="button" onClick='addSeller()' class="btn btn-primary ml-md-auto d-md-flex btadd">Adicionar</button>
@@ -45,7 +38,7 @@ function telephone($number){
                 <th scope="row"><?= $s->id ?></th>
                 <td><?= $s->name ?></td>
                 <td><?= $s->lastname ?></td>
-                <td id="phone"><?= telephone($s->phone) ?></td>
+                <td id="phone"><?= Helper::telephone($s->phone) ?></td>
                 <td id="dtemployed" ><?= date_format(new DateTime($s->dtemployed), "d/m/Y") ?></td>
                 <td> <a class="editseller" href="{{action('SellerController@detail', $s->id)}}"><i class="fas fa-search-plus"></i></a></td>
                 <td> <a class="editseller" href="{{action('SellerController@edit', $s->id)}}"><i class="fas fas fa-edit"></i></a></td>

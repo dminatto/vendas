@@ -2,27 +2,6 @@
 
 @section('conteudo')
 
-@php
-function mask($val, $mask)
-{
- $maskared = '';
- $k = 0;
- for($i = 0; $i<=strlen($mask)-1; $i++)
- {
-   if($mask[$i] == '#')
-   {
-      if(isset($val[$k]))
-       $maskared .= $val[$k++];
-   }
-   else
- {
-     if(isset($mask[$i]))
-     $maskared .= $mask[$i];
-     }
- }
- return $maskared;
-}
-@endphp   
 <div class="jumbotron">
 <div class="row">
     <div class="col-md-12">
@@ -43,7 +22,7 @@ function mask($val, $mask)
                 <li><p>Tipo: <?= $i->type ?></p></li>
                 <li><p>NCM: <?= $i->ncm ?></p></li>
                 <li><p>Unidade: <?= $i->unit ?></p></li>
-                <li><p>Preço: <?= mask($i->price, '#.###,##') ?></p></li>
+                <li><p>Preço: <?= Helper::mask($i->price, '#.###,##') ?></p></li>
                 <li><p>Quantidade: <?= $i->quantity ?></p></li>
                 </ul>
             </div>
