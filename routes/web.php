@@ -40,4 +40,7 @@ Route::get('/venda/detalhe/{id}', 'SaleController@detail');
 
 Route::post('/venda/adiciona', 'SaleController@add');
 Route::post('/venda/update/{id}', 'SaleController@update');
+
+Route::post('/estoque/getPrecoItem/{id}', 'SaleController@get_price');
+
 });

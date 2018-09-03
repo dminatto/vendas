@@ -19,10 +19,14 @@
             </div>
                 <hr>
                 <ul class="container details">
-                <li><p>Tipo: <?= $i->type ?></p></li>
+                @foreach ($type as $key => $item)
+	                @if($item['value'] == $i->type)
+                    <li><p>Tipo: <?= $item['display'] ?></p></li>
+                    @endif
+                @endforeach
                 <li><p>NCM: <?= $i->ncm ?></p></li>
                 <li><p>Unidade: <?= $i->unit ?></p></li>
-                <li><p>Preço: <?= Helper::mask($i->price, '#.###,##') ?></p></li>
+                <li><p>Preço: <?= $i->price ?></p></li>
                 <li><p>Quantidade: <?= $i->quantity ?></p></li>
                 </ul>
             </div>

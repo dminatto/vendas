@@ -13,7 +13,7 @@
 </div>
 @endif 
 
-@if(empty($sellers))
+@if($sellers->count() == 0)
 <div class="alert alert-danger" role="alert">
     Atenção! Não existem vendedores cadastrados!
 </div>

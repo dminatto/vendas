@@ -42,7 +42,7 @@
     								<td class="text-center"><?=$item->quantity?></td>
 									<td class="text-right"><?= $item->item->price ?></td>
 									<td class="text-right"><?=$item->commission?></td>
-                                    <td class="text-right"><?=$item->value ?></td>
+                                    <td class="text-right"> <?= $item->quantity ?> </td>
     							</tr>
                             @endforeach
     							<tr>

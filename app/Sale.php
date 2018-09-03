@@ -21,14 +21,5 @@ class Sale extends Model
     {
         return $this->belongsTo('App\Seller', 'seller_id', 'id');
         
-    }
-
-    function calc_price($qtd, $value){
-        
-        $result = $qtd * $value;
-        
-        return $result;
-    }
-    
-    
+    } 
 }

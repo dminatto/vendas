@@ -2,18 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\SaleItem;
 use App\Item;
 use Request;
 use Auth;
 
 class ItemController extends Controller {
-    
-    public function __construct() { 
+
+    public function __construct() {
+        
         $this->middleware('auth'); 
     }
 
-    public function new(){ 
-        return view('alteritem') -> with('i', new Item);
+    public function generateType(){
+        $type_item = collect([['value' => 'S', 'display' =>'Serviço'], 
+                              ['value' => 'P', 'display' => 'Produto']]);
+
+        return $type_item;
+    }
+
+    public function new(){
+        $i = new Item;
+        $type = $this->generateType();
+
+        return view('alteritem', compact('i', 'type'));
     }
 
     public function add(){
@@ -24,24 +36,36 @@ class ItemController extends Controller {
     }
 
     public function list(){
-        $item = Item::all();
-        return view('listitem') -> with('items', $item);
+        $type = $this->generateType();
+        
+        $items = Item::all();
+        
+        return view('listitem', compact('items', "type"));
     }
 
     public function delete($id) {
+        
+        $listItem = SaleItem::where("item_id", $id)->get();
+
+        if($listItem->count() > 0) { 
+            return "Esse produto está sendo atrelado em uma venda!"; 
+        } 
+
         $item = Item::find($id);
         $item -> delete(); 
         return redirect() -> action('ItemController@list');
     }
 
     public function edit($id){
-        $item = Item::find($id);
+        $i = Item::find($id);
 
-        if(empty($item)) { 
+        if(empty($i)) { 
             return "Esse fornecedor não existe"; 
         } 
+
+        $type = $this->generateType();
         
-        return view('alteritem') -> with('i', $item); 
+        return view('alteritem', compact('i', 'type')); 
     }
 
     public function update($id) {
@@ -53,12 +77,14 @@ class ItemController extends Controller {
     }
 
     public function detail($id){
-        $item = Item::find($id);
+        $i = Item::find($id);
 
-        if(empty($item)) { 
+        if(empty($i)) { 
             return "Esse item não existe"; 
         } 
+
+        $type = $this->generateType();
         
-        return view('detailitem') -> with('i', $item); 
+        return view('detailitem', compact('i', 'type')); 
     }
 }

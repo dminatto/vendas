@@ -95,7 +95,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">R$</span>
                                             </div>
-                                            <input type="text" class="form-control text-right" value="<?= $item->item->price?>" disabled >
+                                            <input type="number" class="form-control text-right" value="<?= $item->item->price?>" disabled >
                                         </div>
                                     </td>
                                     <td><div class="input-group">
@@ -109,7 +109,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">R$</span>
                                             </div>
-                                            <input type="text" class="form-control text-right" value="<?= $item->calc_price($item->quantity, $item->item->price) ?>" disabled>
+                                            <input type="text" class="form-control text-right" value="<?= Helper::calc_price($item->quantity, $item->item->price) ?>" disabled>
                                         </div>	
                                     </td>
                                     <td><button type="button" class="btn btn-secundary" id="btn_del" onclick="remove(this)"><i class="fas fas fa-trash"></i></button></td>
@@ -130,8 +130,6 @@
 </form>
 <script>
     $(document).ready(function () { 
-        $('#price').mask('##.##0,00');
-        $('#quantity').mask('000000');
         
         $('.btn_add').on('click', function(){
             var newRow = $("<tr>");
@@ -161,7 +159,7 @@
             cols += '<div class="input-group-prepend">';
             cols += '<span class="input-group-text">R$</span>';
             cols += '</div>';
-            cols += '<input type="text" class="form-control text-right" id="price" >';
+            cols += '<input type="number" class="form-control text-right" id="price" >';
             cols += '</td>';
 
             cols += '<td>';
@@ -185,15 +183,7 @@
             newRow.append(cols);
             $(".table-condensed").append(newRow);
         });
-      
-		$("#myForm").submit(function() {
-			$("#price").unmask();
-			$("#quantity").unmask();
-        });
         
      });
-
 </script>
-
-
 @stop

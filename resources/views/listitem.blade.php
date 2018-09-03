@@ -13,7 +13,7 @@
 </div>
 @endif 
 
-@if(empty($items))
+@if($items->count() == 0)
 <div class="alert alert-danger" role="alert">
     Atenção! Não existem itens cadastrados!
 </div>
@@ -35,7 +35,11 @@
           @foreach ($items as $i)
             <tr>
                 <th scope="row"><?= $i->id ?></th>
-                <td><?= $i->type ?></td>
+                @foreach ($type as $key => $item)
+	                @if($item['value'] == $i->type)
+                        <td><?= $item['display'] ?></td>
+                    @endif
+                @endforeach
                 <td><?= $i->description ?></td>
                 <td><?= $i->quantity ?></td>
                 <td> <a class="detailitem" href="{{action('ItemController@detail', $i->id)}}"><i class="fas fa-search-plus"></i></a></td>

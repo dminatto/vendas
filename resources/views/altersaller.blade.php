@@ -49,11 +49,15 @@
         </div>
         <div class="col-md-2 mb-3">
             <label for="gender">Gênero </label>
-            <select class="form-control" name="gender" value=<?= $s->gender ?> required>
-              <option></option>
-              <option value="M">Masculino</option>
-              <option value="F">Feminino</option>
-              <option value="O">Outro</option>
+            <select class="form-control" name="gender" id="gender" required>
+            <option></option>
+                @foreach ($gender as $key => $item)
+                    @if($item['value'] == $s->gender)
+                        <option selected value="<?= $item['value'] ?>"><?= $item['display'] ?></option>
+                    @else
+                        <option value="<?= $item['value'] ?>"><?= $item['display'] ?></option>
+                    @endif
+                @endforeach
             </select>
             <div class="invalid-feedback">
                 Informe o gênero do vendedor.
@@ -119,8 +123,15 @@
         </div>
         <div class="col-md-4 mb-3">
             <label for="state">Estado</label>
-            <select class="form-control" name="state" id="state"  value="<?= $s->state?>" required>
-            
+            <select class="form-control" name="state" id="state" required>
+                <option></option>
+                @foreach ($state as $key => $item)
+                    @if($item['value'] == $s->state)
+                        <option selected value="<?= $item['value'] ?>"><?= $item['display'] ?></option>
+                    @else
+                        <option value="<?= $item['value'] ?>"><?= $item['display'] ?></option>
+                    @endif
+                @endforeach
             </select>
             <div class="invalid-feedback">
                 Informe um estado para o vendedor.
@@ -140,157 +151,12 @@
         $("#cep").unmask();
         $("#adressnumber").unmask();
     });
+    
     $(document).ready(function () { 
         $("#cpf").mask('000.000.000-00', {reverse: true});
         $('#phone').mask('(00) 0000-0000');
         $('#cep').mask('00000-000');
         $('#adressnumber').mask('000000');
-
-        var comboCity = document.getElementById("state");
-        
-        var opt0 = document.createElement("option");
-        opt0.value = "";
-        opt0.text = "";
-        comboCity.add(opt0, comboCity.options[0]);
-
-        var opt1 = document.createElement("option");
-        opt1.value = "AC";
-        opt1.text = "Acre";
-        comboCity.add(opt1, comboCity.options[1]);
-
-        var opt2 = document.createElement("option");
-        opt2.value = "AL";
-        opt2.text = "Alagoas";
-        comboCity.add(opt2, comboCity.options[2]);
-
-        var opt3 = document.createElement("option");
-        opt3.value = "AP";
-        opt3.text = "Amapá";
-        comboCity.add(opt3, comboCity.options[3]);
-
-        var opt4 = document.createElement("option");
-        opt4.value = "AM";
-        opt4.text = "Amazonas";
-        comboCity.add(opt4, comboCity.options[4]);
-
-        var opt5 = document.createElement("option");
-        opt5.value = "BA";
-        opt5.text = "Bahia";
-        comboCity.add(opt5, comboCity.options[5]);
-
-        var opt6 = document.createElement("option");
-        opt6.value = "CE";
-        opt6.text = "Ceará";
-        comboCity.add(opt6, comboCity.options[6]);
-
-        var opt7 = document.createElement("option");
-        opt7.value = "DF";
-        opt7.text = "Distrito Federal";
-        comboCity.add(opt7, comboCity.options[7]);
-
-        var opt8 = document.createElement("option");
-        opt8.value = "ES";
-        opt8.text = "Espírito Santo";
-        comboCity.add(opt8, comboCity.options[8]);
-
-        var opt9 = document.createElement("option");
-        opt9.value = "GO";
-        opt9.text = "Goiás";
-        comboCity.add(opt9, comboCity.options[9]);
-
-        var opt10 = document.createElement("option");
-        opt10.value = "MA";
-        opt10.text = "Maranhão";
-        comboCity.add(opt10, comboCity.options[10]);
-
-        var opt11 = document.createElement("option");
-        opt11.value = "MT";
-        opt11.text = "Mato Grosso";
-        comboCity.add(opt11, comboCity.options[11]);
-
-        var opt12 = document.createElement("option");
-        opt12.value = "MS";
-        opt12.text = "Mato Grosso do Sul";
-        comboCity.add(opt12, comboCity.options[12]);
-
-        var opt13 = document.createElement("option");
-        opt13.value = "MG";
-        opt13.text = "Minas Gerais";
-        comboCity.add(opt13, comboCity.options[13]);
-
-        var opt14 = document.createElement("option");
-        opt14.value = "PA";
-        opt14.text = "Pará";
-        comboCity.add(opt14, comboCity.options[14]);
-
-        var opt15 = document.createElement("option");
-        opt15.value = "PB";
-        opt15.text = "Paraíba";
-        comboCity.add(opt15, comboCity.options[15]);
-
-        var opt16 = document.createElement("option");
-        opt16.value = "PR";
-        opt16.text = "Paraná";
-        comboCity.add(opt16, comboCity.options[16]);
-
-        var opt17 = document.createElement("option");
-        opt17.value = "PE";
-        opt17.text = "Pernambuco";
-        comboCity.add(opt17, comboCity.options[17]);
-
-        var opt18 = document.createElement("option");
-        opt18.value = "PI";
-        opt18.text = "Piauí";
-        comboCity.add(opt18, comboCity.options[18]);
-
-        var opt19 = document.createElement("option");
-        opt19.value = "RJ";
-        opt19.text = "Rio de Janeiro";
-        comboCity.add(opt19, comboCity.options[19]);
-
-        var opt20 = document.createElement("option");
-        opt20.value = "RN";
-        opt20.text = "Rio Grande do Norte";
-        comboCity.add(opt20, comboCity.options[20]);
-
-        var opt21 = document.createElement("option");
-        opt21.value = "RS";
-        opt21.text = "Rio Grande do Sul";
-        comboCity.add(opt21, comboCity.options[21]);
-
-        var opt22 = document.createElement("option");
-        opt22.value = "RO";
-        opt22.text = "Rondônia";
-        comboCity.add(opt22, comboCity.options[22]);
-
-        var opt23 = document.createElement("option");
-        opt23.value = "RR";
-        opt23.text = "Roraima";
-        comboCity.add(opt23, comboCity.options[23]);
-
-        var opt24 = document.createElement("option");
-        opt24.value = "SC";
-        opt24.text = "Santa Catarina";
-        comboCity.add(opt24, comboCity.options[24]);
-
-        var opt25 = document.createElement("option");
-        opt25.value = "SP";
-        opt25.text = "São Paulo";
-        comboCity.add(opt25, comboCity.options[25]);
-
-        var opt26 = document.createElement("option");
-        opt26.value = "SE";
-        opt26.text = "Sergipe";
-        comboCity.add(opt26, comboCity.options[26]);
-
-        var opt26 = document.createElement("option");
-        opt26.value = "TO";
-        opt26.text = "Tocantins";
-        comboCity.add(opt26, comboCity.options[26]);
-
-        
-
-});
-
+    });
 </script>
 @stop
