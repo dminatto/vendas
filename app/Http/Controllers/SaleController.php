@@ -80,7 +80,7 @@ class SaleController extends Controller {
         $seller = Seller::all();
     
         if(empty($sale)) { 
-            return "Esse fornecedor não existe"; 
+            return redirect() -> action('Auth\LoginController@error', array('id' => 2));
         } 
         
         return view('alterSale', compact('sale', 'product', 'seller'));
@@ -120,7 +120,7 @@ class SaleController extends Controller {
         $sale = Sale::find($id);
 
         if(empty($sale)) { 
-            return "Esse fornecedor não existe"; 
+            return redirect() -> action('Auth\LoginController@error', array('id' => 2));
         } 
         
         return view('detailSale') -> with('sale', $sale); 

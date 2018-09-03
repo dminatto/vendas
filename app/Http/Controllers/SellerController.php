@@ -81,7 +81,7 @@ class SellerController extends Controller {
         $sale = Sale::where("seller_id", $id)->get();
 
         if($sale->count() > 0) { 
-            return "Esse vendedor está atrelado em uma venda!"; 
+            return redirect() -> action('Auth\LoginController@error', array('id' => 1));
         } 
 
         $seller = Seller::find($id);
@@ -93,8 +93,8 @@ class SellerController extends Controller {
 
         $s = Seller::find($id);
 
-        if(empty($s)) { 
-            return "Esse fornecedor não existe"; 
+        if(empty($s)) {
+            return redirect() -> action('Auth\LoginController@error', array('id' => 0));
         } 
         $state = $this->generateStates();
         $gender = $this->generateGender();
@@ -103,7 +103,7 @@ class SellerController extends Controller {
     }
 
     public function update($id) {
-        
+
         $params = Request::all();
         $seller = Seller::find($id);
         $seller->update($params);
@@ -115,7 +115,7 @@ class SellerController extends Controller {
         $seller = Seller::find($id);
 
         if(empty($seller)) { 
-            return "Esse fornecedor não existe"; 
+            return redirect() -> action('Auth\LoginController@error', array('id' => 0));
         } 
         
         return view('detailseller') -> with('s', $seller); 

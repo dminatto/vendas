@@ -48,7 +48,7 @@ class ItemController extends Controller {
         $listItem = SaleItem::where("item_id", $id)->get();
 
         if($listItem->count() > 0) { 
-            return "Esse produto está sendo atrelado em uma venda!"; 
+            return redirect() -> action('Auth\LoginController@error', array('id' => 3));
         } 
 
         $item = Item::find($id);
@@ -60,7 +60,7 @@ class ItemController extends Controller {
         $i = Item::find($id);
 
         if(empty($i)) { 
-            return "Esse fornecedor não existe"; 
+            return redirect() -> action('Auth\LoginController@error', array('id' => 4));
         } 
 
         $type = $this->generateType();
@@ -80,7 +80,7 @@ class ItemController extends Controller {
         $i = Item::find($id);
 
         if(empty($i)) { 
-            return "Esse item não existe"; 
+            return redirect() -> action('Auth\LoginController@error', array('id' => 4));
         } 
 
         $type = $this->generateType();

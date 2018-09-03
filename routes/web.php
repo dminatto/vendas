@@ -11,6 +11,7 @@ Route::get('/', 'Auth\LoginController@index');
 Route::get('/login', 'Auth\LoginController@login')->name('login');
 Route::post('/authenticate', 'Auth\LoginController@authenticate');
 Route::get('/logout', 'Auth\LoginController@logout');
+Route::get('/error/{id}', 'Auth\LoginController@error');
 
 Route::group(['middleware' => 'web'], function () {
 
