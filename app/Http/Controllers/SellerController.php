@@ -112,12 +112,16 @@ class SellerController extends Controller {
     }
 
     public function detail($id){
-        $seller = Seller::find($id);
+        $s = Seller::find($id);
 
-        if(empty($seller)) { 
+        if(empty($s)) { 
             return redirect() -> action('Auth\LoginController@error', array('id' => 0));
         } 
+
+        $state = $this->generateStates();
+        $gender = $this->generateGender();
+
+        return view('detailseller', compact('s', 'state', 'gender'));
         
-        return view('detailseller') -> with('s', $seller); 
     }
 }

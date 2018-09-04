@@ -25,7 +25,6 @@
                 <th scope="col">Data da Venda</th>
                 <th scope="col">Número</th>
                 <th scope="col">Vendedor</th>
-                <th scope="col">Valor</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
                 <th scope="col"></th>
@@ -37,7 +36,6 @@
                 <td><?= date_format(new DateTime($s->dtsale), "d/m/Y") ?></td>
                 <th> <?= $s->id ?> </th>
                 <td> <?= $s->seller->name . " ". $s->seller->lastname ?></td>
-                <td> <?= $s->value ?> </td>
                 <td> <a class="editsele" href="{{action('SaleController@detail', $s->id)}}"><i class="fas fa-search-plus"></i></a></td>
                 <td> <a class="editsele" href="{{action('SaleController@edit', $s->id)}}"><i class="fas fas fa-edit"></i></a></td>
                 <td> <a class="delsele" href="{{action('SaleController@delete', $s->id)}}"><i class="fas fas fa-trash"></i></a></td>

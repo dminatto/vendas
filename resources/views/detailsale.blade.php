@@ -13,7 +13,6 @@
     <ul class="container details">
         <li><p>Data da Venda: <?=  date_format(new DateTime($sale->dtsale), "d/m/Y") ?></p></li>
         <li><p>Vendedor: <?= $sale->seller->name . " ". $sale->seller->lastname ?></p></li>
-        <li><p>Valor da Compra: <?= $sale->value ?></p></li>
     </ul>
 
      <div class="row">
@@ -42,7 +41,11 @@
     								<td class="text-center"><?=$item->quantity?></td>
 									<td class="text-right"><?= $item->item->price ?></td>
 									<td class="text-right"><?=$item->commission?></td>
-                                    <td class="text-right"> <?= $item->quantity ?> </td>
+									@php
+										$vlitem = Helper::calc_price($item->quantity, $item->item->price);
+										$vltotal =+ $vlitem;
+									@endphp
+									<td class="text-right"> <?= $vlitem ?> </td>
     							</tr>
                             @endforeach
     							<tr>
@@ -50,7 +53,7 @@
 									<td class="thick-line"></td>
 									<td class="thick-line"></td>
     								<td class="thick-line text-center"><strong>Subtotal</strong></td>
-                                    <td class="thick-line text-right">R$ <?= $sale->value?></td>                          
+                                    <td class="thick-line text-right">R$ <?= $vltotal ?></td>                          
     							</tr>
     						</tbody>
     					</table>

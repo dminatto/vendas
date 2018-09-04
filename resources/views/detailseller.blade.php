@@ -9,7 +9,7 @@
             <h3>Dados do Vendedor</h3>
             <div class="btn-group float-right mt-2">
                 <button type="button" onClick='listSeller()' class="btn btn-primary">Voltar</button>
-                <button type="button" onClick='editSeller(<?= $s->id ?>)' class="btn btn-secondary">Editar</button>
+                <a type="button" href="{{action('SaleController@edit', $s->id)}}" class="btn btn-secondary">Editar</button>
             </div>
     </div>
     </div>
@@ -25,7 +25,11 @@
                 <ul class="container details">
                 <li><p>CPF: <?= Helper::mask($s->cpf,'###.###.###-##') ?></p></li>
                 <li><p>Data de Nascimento: <?= date_format(new DateTime($s->dtborn), "d/m/Y") ?></p></li>
-                <li><p>Gênero: <?= $s->gender ?></p></li>
+                @foreach ($gender as $key => $item)
+	                @if($item['value'] == $s->gender)
+                        <li><p>Gênero: <?= $item['display'] ?></p></li>
+                    @endif
+                @endforeach
                 <li><p>Telefone: <?= Helper::telephone($s->phone) ?></p></li>
                 <li><p>Data de Contratação: <?= date_format(new DateTime($s->dtemployed), "d/m/Y") ?></p></li>
                 </ul>
@@ -35,7 +39,12 @@
                 <li><p>Endereço: <?= $s->adress . ", " . $s->adressnumber ?></p></li>
                 <li><p>Bairro: <?= $s->district ?></p></li>
                 <li><p>Cidade: <?= $s->city ?></p></li>
-                <li><p>Estado: <?= $s->state ?></p></li>
+                @foreach ($state as $key => $item)
+	                @if($item['value'] == $s->state)
+                        <li><p>Estado: <?= $item['display'] ?></p></li>
+                    @endif
+                @endforeach
+                
                 </ul>
             </div>
   </div>

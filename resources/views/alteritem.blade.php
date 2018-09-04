@@ -58,7 +58,7 @@
         </div>
         <div class="col-md-2 mb-3">
             <label for="price">Preço</label>
-            <input type="number" class="form-control" id="price" name="price" value="<?= $i->price?>" required>
+            <input type="number" class="form-control" id="price" step="any" name="price" value="<?= $i->price?>" required>
             <div class="invalid-feedback">
                 Informe uma preço para o item.
             </div>

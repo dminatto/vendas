@@ -16,7 +16,6 @@ class CreateSalesTable extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->increments('id');
             $table->date('dtsale');
-            $table->decimal('value');
             $table->integer('seller_id');
             
 

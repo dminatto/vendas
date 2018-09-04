@@ -30,36 +30,7 @@ class SaleController extends Controller {
         $product = Item::all();
         $seller = Seller::all();
 
-        return view('alterSale', compact('sale', 'product', 'seller'));
-    }
-
-    public function add(){
-
-       $sale = new Sale();
-       $sale->dtsale =  Request::input('dtsale');
-       $sale->value =  Request::input('value');
-       $sale->seller_id =  Request::input('seller_id');
-       $sale->save();
-     
-       $seller = Seller::find($sale->seller_id);
-       $ageseller = Helper::calc_age($seller->dtemployed);
-       
-       $item = $_POST['item_id'];
-       $quantity = $_POST['quantity'];
-       
-
-       $itens = array();
-       for ($value = 0; $value < count($item); $value++) {
-            $itens[$value]  = new SaleItem();
-            $itens[$value] ->item_id = $item[$value];
-            $itens[$value] ->quantity = $quantity[$value];
-            $itens[$value] ->commission = $this->calc_item_comission($ageseller, $quantity[$value], $item[$value]);
-        }
-  
-       $sale->saleitem()->saveMany($itens);
-
-       return redirect() -> action('SaleController@list');
-
+        return view('addSale', compact('sale', 'product', 'seller'));
     }
 
     public function list(){
@@ -83,37 +54,7 @@ class SaleController extends Controller {
             return redirect() -> action('Auth\LoginController@error', array('id' => 2));
         } 
         
-        return view('alterSale', compact('sale', 'product', 'seller'));
-    }
-
-    public function update($id) {
-        $params = Request::all();
-        $sale = Sale::find($id);
-
-        $sale->dtsale =  Request::input('dtsale');
-        $sale->value =  Request::input('value');
-        $sale->seller_id =  Request::input('seller_id');
-        $sale->update();
-
-       $item = $params['item_id'];
-       $quantity = $params['quantity'];
-
-       $seller = Seller::find($sale->seller_id);
-       $ageseller = Helper::calc_age($seller->dtemployed);
-
-       $itens = array();
-       for ($value = 0; $value < count($item); $value++) {
-
-            $itens[$value]  = new SaleItem();
-            $itens[$value] ->item_id = $item[$value];
-            $itens[$value] ->quantity = $quantity[$value];
-            $itens[$value] ->commission = $this->calc_item_comission($ageseller, $quantity[$value], $item[$value]);
-        }
-
-        $sale->saleitem()->delete();
-        $sale->saleitem()->saveMany($itens);
-      
-        return redirect() -> action('SaleController@list');
+        return view('addSale', compact('sale', 'product', 'seller'));
     }
 
     public function detail($id){
@@ -126,12 +67,81 @@ class SaleController extends Controller {
         return view('detailSale') -> with('sale', $sale); 
     }
 
-    public static function get_price($id){
+    public function generateItensSale($age){
 
-        $item = Item::find($id);
+        $request = Request::all();
         
-        return json_encode(['vlitem', $item->value]);
+        if(isset($request['item_id']) && isset($request['quantity'])){
+        
+            $item = $request['item_id'];
+            $quantity = $request['quantity'];
+        
+            $itens = array();
+            
+            for ($value = 0; $value < count($item); $value++) {
+    
+                $itens[$value]  = new SaleItem();
+                $itens[$value] ->item_id = $item[$value];
+                $itens[$value] ->quantity = $quantity[$value];
+                $vlcommission = $this->calc_item_comission($age, $quantity[$value], $item[$value]);
+                $itens[$value] ->commission = $vlcommission;
+            }
 
+            return $itens;
+        }
+    }
+    
+    public function getSellerAge($id){
+        $seller = Seller::find($id);
+
+        return Helper::calc_age($seller->dtemployed);
+    }
+
+    public function add(){
+        
+        $sale = new Sale(Request::all());
+        $sale->save();
+      
+        $ageseller = $this->getSellerAge($sale->seller_id);
+        $itens = $this->generateItensSale($ageseller);
+
+        $sale->saleitem()->saveMany($itens);
+ 
+        return redirect() -> action('SaleController@list');
+ 
+     }
+
+    public function update($id) {
+        
+        $sale = Sale::find($id);
+        $sale->dtsale =  Request::input('dtsale');
+        $sale->seller_id =  Request::input('seller_id');
+        $sale->update();        
+
+        $ageseller = $this->getSellerAge($sale->seller_id);
+        $itens = $this->generateItensSale($ageseller);
+        
+        $sale->saleitem()->delete();
+        $sale->saleitem()->saveMany($itens);
+      
+        return redirect() -> action('SaleController@list');
+    }
+
+    public function newSale(){
+
+        $product = Item::all();
+        $seller = Seller::all();
+        
+        $sale = new Sale();
+
+        $sale->id =  Request::input('id');
+        $sale->dtsale =  Request::input('dtsale');
+        $sale->seller_id =  Request::input('seller_id');
+
+        $ageseller = $this->getSellerAge($sale->seller_id);
+        $saleItens = $this->generateItensSale($ageseller);
+
+        return view('alterSale', compact('sale', 'product', 'seller', 'saleItens'));
     }
 
    

@@ -35,24 +35,25 @@ class functions{
         $result = $qtd * $value;
         
         return $result;
-    }
+    } 
 
     public static function calc_age($dtemployed){
-        $date = new DateTime( "$dtemployed" ); // data de nascimento
-        $interval = $date->diff( new DateTime() ); // data definida
+        $date = new DateTime( "$dtemployed" ); 
+        $interval = $date->diff( new DateTime() );
         
         return $interval->y;
     }
-
 
     public static function calc_commission($age, $type, $value){
         
         if ($age < 5){
             switch ($type){
                 case 'P':
-                $percent = 0.10;
+                    $percent = 0.10;
+                    break;
                 case 'S':
-                $percent = 0.20;
+                    $percent = 0.20;
+                    break;
             }
         }else{
             $percent = 0.30;

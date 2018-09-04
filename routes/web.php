@@ -8,6 +8,7 @@ Route::resource('auth', 'Auth\AuthController');
 Route::resource('password', 'Auth\PasswordController');
 
 Route::get('/', 'Auth\LoginController@index');
+Route::get('/home', 'Auth\LoginController@index');
 Route::get('/login', 'Auth\LoginController@login')->name('login');
 Route::post('/authenticate', 'Auth\LoginController@authenticate');
 Route::get('/logout', 'Auth\LoginController@logout');
@@ -41,7 +42,6 @@ Route::get('/venda/detalhe/{id}', 'SaleController@detail');
 
 Route::post('/venda/adiciona', 'SaleController@add');
 Route::post('/venda/update/{id}', 'SaleController@update');
-
-Route::post('/estoque/getPrecoItem/{id}', 'SaleController@get_price');
+Route::post('/venda/pre-venda', 'SaleController@newSale');
 
 });
